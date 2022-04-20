@@ -2,14 +2,15 @@ package main
 
 import (
 	"fmt"
-	"github.com/nareix/joy4/av"
-	"github.com/nareix/joy4/av/avutil"
-	"github.com/nareix/joy4/av/pktque"
-	"github.com/nareix/joy4/av/pubsub"
-	"github.com/nareix/joy4/format"
-	"github.com/nareix/joy4/format/rtmp"
 	"sync"
 	"time"
+
+	"github.com/yangbin1023/joy4/av"
+	"github.com/yangbin1023/joy4/av/avutil"
+	"github.com/yangbin1023/joy4/av/pktque"
+	"github.com/yangbin1023/joy4/av/pubsub"
+	"github.com/yangbin1023/joy4/format"
+	"github.com/yangbin1023/joy4/format/rtmp"
 )
 
 func init() {
