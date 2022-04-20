@@ -8,16 +8,17 @@ import (
 	"crypto/sha256"
 	"encoding/hex"
 	"fmt"
-	"github.com/nareix/joy4/utils/bits/pio"
-	"github.com/nareix/joy4/av"
-	"github.com/nareix/joy4/av/avutil"
-	"github.com/nareix/joy4/format/flv"
-	"github.com/nareix/joy4/format/flv/flvio"
 	"io"
 	"net"
 	"net/url"
 	"strings"
 	"time"
+
+	"github.com/nareix/joy4/av"
+	"github.com/nareix/joy4/av/avutil"
+	"github.com/nareix/joy4/format/flv"
+	"github.com/nareix/joy4/format/flv/flvio"
+	"github.com/nareix/joy4/utils/bits/pio"
 )
 
 var Debug bool
@@ -1615,7 +1616,12 @@ func (self *Conn) handshakeServer() (err error) {
 		hsCreate2(S2, digest)
 	} else {
 		copy(S1, C1)
-		copy(S2, C2)
+		copy(S2, C1)
+		var t uint32 = uint32(time.Now().Unix())
+		S2[4] = byte(t % 256)
+		S2[5] = byte(t / 256 % 256)
+		S2[6] = byte(t / 256 / 256 % 256)
+		S2[7] = byte(t / 256 / 256 / 256 % 256)
 	}
 
 	// > S0S1S2
