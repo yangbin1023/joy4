@@ -1617,11 +1617,11 @@ func (self *Conn) handshakeServer() (err error) {
 	} else {
 		copy(S1, C1)
 		copy(S2, C1)
-		var t uint32 = uint32(time.Now().Unix())
-		S2[4] = byte(t % 256)
-		S2[5] = byte(t / 256 % 256)
-		S2[6] = byte(t / 256 / 256 % 256)
-		S2[7] = byte(t / 256 / 256 / 256 % 256)
+		var t = uint32(time.Now().Unix())
+		S2[4] = byte((t >> 0) & 0xFF)
+		S2[5] = byte((t >> 8) & 0xFF)
+		S2[6] = byte((t >> 16) & 0xFF)
+		S2[7] = byte((t >> 24) & 0xFF)
 	}
 
 	// > S0S1S2
